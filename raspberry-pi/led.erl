@@ -1,5 +1,4 @@
 -module(led).
--import(gpio).
 -export([start/1, stop/1, loop/1]).
 
 start(Pin) ->
