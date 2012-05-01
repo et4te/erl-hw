@@ -1,5 +1,5 @@
 -module(led).
--export([start/1, stop/1, loop/1]).
+-export([start/1, stop/1, loop/2]).
 
 start(Pin) ->
   Fd = gpio:init(Pin, out),
