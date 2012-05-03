@@ -3,17 +3,20 @@
 -export([create/4]).
 
 %%------------------------------------------------------------------------------
-%% Create a Ring of size Size, where each message may be passed around the ring
-%% at most RevolutionLimit times.
-%%
-%% This function is meant to be exported by this module.
+%% Process Ring
+%%------------------------------------------------------------------------------
+%%  A process ring is a ring of relay processes (see relay.erl). The ring module
+%% is in charge of creating process rings, and ensuring that they are connected
+%% together in a ring.
+%%------------------------------------------------------------------------------
+
+%%------------------------------------------------------------------------------
+%% The create function is in charge of creating a ring of relays, and connecting
+%% each together linearly.
 %%------------------------------------------------------------------------------
 create(Size, RevolutionLimit, Led, TestPid) ->
     create(Size, Size, RevolutionLimit * Size, Led, TestPid, []).
 
-%%------------------------------------------------------------------------------
-%% Create a ring of relays and connect each together linearly.
-%%------------------------------------------------------------------------------
 create(0, _RingSize, _RelayLimit, _Led, _TestPid, Ring) ->
     [FirstRelay|Rest] = Ring,
     connect(FirstRelay, Rest, first);
